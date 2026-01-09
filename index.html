@@ -9,10 +9,78 @@
 <body>
     <header class="site-hero">
         <div class="container">
-            <h1>🎁 TUDEALS</h1>
-            <p>ดีลสุดคุ้ม Shopee | Lazada | TikTok Shop</p>
+            <div class="hero-inner">
+                <div class="brand">
+                    <h1>🎁 TUDEALS</h1>
+                    <p>ดีลสุดคุ้ม Shopee | Lazada | TikTok Shop</p>
+                </div>
+                <div class="search-cta">
+                    <input id="q" type="search" placeholder="ค้นหาสินค้า...">
+                </div>
+            </div>
         </div>
     </header>
-    <main class="container" id="deals-grid"></main>
+
+    <main class="container">
+        <section id="deals-grid" class="grid"></section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 TUDEALS Affiliate | Shopee | Lazada | TikTok</p>
+        </div>
+    </footer>
+
+    <script>
+        async function loadDeals() {
+            const res = await fetch('data/deals.json');
+            const data = await res.json();
+            const grid = document.getElementById('deals-grid');
+            const qInput = document.getElementById('q');
+            
+            function renderList(list) {
+                grid.innerHTML = '';
+                if (!list.length) {
+                    grid.innerHTML = '<p class="muted">ไม่พบสินค้า</p>';
+                    return;
+                }
+                list.forEach(d => {
+                    const card = document.createElement('article');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="card-inner">
+                            <div class="card-img" style="background-image:url('${d.image}')"></div>
+                            <div class="card-body">
+                                <h4 class="card-title">${d.title}</h4>
+                                <p class="muted">${d.desc}</p>
+                                <div class="card-meta">
+                                    <span>${d.price.toLocaleString()} บาท</span>
+                                    <span style="color: #ff6b6b">-${d.discount}%</span>
+                                </div>
+                                <div class="card-actions">
+                                    <a class="btn" href="/go/${d.slug}">ดูสินค้า</a>
+                                    <a class="btn ghost" href="${d.affiliate}" target="_blank" rel="noopener">ซื้อเลย</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+            
+            renderList(data);
+            
+            qInput.addEventListener('input', () => {
+                const q = qInput.value.trim().toLowerCase();
+                if (!q) return renderList(data);
+                renderList(data.filter(d => 
+                    d.title.toLowerCase().includes(q) || 
+                    d.desc.toLowerCase().includes(q)
+                ));
+            });
+        }
+        
+        loadDeals();
+    </script>
 </body>
 </html>
