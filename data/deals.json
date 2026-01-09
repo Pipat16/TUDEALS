@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "prod-001",
+    "title": "🎧 หูฟัง Soundcore Pro",
+    "desc": "Noise Cancelling ระบบ LDAC ดีเยี่ยม",
+    "price": 1290,
+    "discount": 30,
+    "affiliate": "https://shopee.co.th/product-affiliate-001",
+    "image": "https://via.placeholder.com/140"
+  },
+  {
+    "slug": "prod-002",
+    "title": "📱 Power Bank 30000mAh",
+    "desc": "Fast Charging 65W ชาร์จเร็ว",
+    "price": 899,
+    "discount": 25,
+    "affiliate": "https://lazada.co.th/product-affiliate-002",
+    "image": "https://via.placeholder.com/140"
+  },
+  {
+    "slug": "prod-003",
+    "title": "⌚ Smartwatch T500",
+    "desc": "GPS, Heart Rate, 14 วันแบต",
+    "price": 2290,
+    "discount": 15,
+    "affiliate": "https://tiktok.com/shop/product-affiliate-003",
+    "image": "https://via.placeholder.com/140"
+  }
+]
